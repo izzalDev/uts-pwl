@@ -1,4 +1,8 @@
 <?= $this->extend("layouts/default"); ?>
 <?= $this->section("content"); ?>
-  <h1>Halo Dunia!</h1>
-<?= $this->endSection(); ?>
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Username : <?= session()->get('username'); ?></br>Role : <?= session()->get('role'); ?></h5>
+  </div>
+</div>
+<?= $this->endSection(); ?> 

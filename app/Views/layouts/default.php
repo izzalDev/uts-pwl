@@ -20,3 +20,4 @@
 
 </main><!-- End #main -->
 <?= $this->include("partials/footer"); ?>
+<?= $this->include("partials/scripts");
