@@ -8,5 +8,6 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'AuthController::index');
 $routes->post('/login', 'AuthController::login');
 $routes->get('/logout', 'AuthController::logout');
-$routes->get('/user', 'DashboardController::user');
-$routes->get('/admin', 'DashboardController::admin');
+
+$routes->get('/user', 'DashboardController::index');
+$routes->get('/admin', 'DashboardController::index');
