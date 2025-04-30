@@ -32,7 +32,6 @@ class AuthController extends BaseController
       return redirect()->back();
     }
 
-    // Autentikasi
     $user = $this->auth($username, $password);
 
     if (!$user) {
@@ -40,17 +39,7 @@ class AuthController extends BaseController
       return redirect()->back();
     }
 
-    session()->set([
-      'username'   => $user['username'],
-      'role'       => $user['role'],
-      'isLoggedIn' => true,
-    ]);
-
-    if ($user['role'] == "admin") {
-      return redirect()->to(base_url('/admin'));
-    } else if ($user['role'] == "user") {
-      return redirect()->to(base_url('/user'));
-    };
+    return redirect()->to(base_url($user['role']));
   }
 
   public function logout()
@@ -59,7 +48,7 @@ class AuthController extends BaseController
     return redirect()->to(base_url('/'));
   }
 
-  private function createDummy(): array
+  private function createDummy()
   {
     return [
       [
@@ -75,7 +64,7 @@ class AuthController extends BaseController
     ];
   }
 
-  private function auth(string $username, string $password): ?array
+  private function auth(string $username, string $password)
   {
     foreach ($this->users as $user) {
       $hash_password = hash('sha256', $password);
@@ -86,6 +75,12 @@ class AuthController extends BaseController
       if ($user['password'] != $hash_password) {
         continue;
       }
+
+      session()->set([
+        'username'   => $user['username'],
+        'role'       => $user['role'],
+        'isLoggedIn' => true,
+      ]);
 
       return $user;
     }
