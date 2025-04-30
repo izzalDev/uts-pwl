@@ -29,14 +29,14 @@ class AuthController extends BaseController
         'failed',
         'Username dan Password tidak boleh kosong'
       );
-      return redirect()->back();
+      return redirect()->back()->withInput();
     }
 
     $user = $this->auth($username, $password);
 
     if (!$user) {
       session()->setFlashdata('failed', 'Username atau Password salah');
-      return redirect()->back();
+      return redirect()->back()->withInput();
     }
 
     return redirect()->to(base_url($user['role']));

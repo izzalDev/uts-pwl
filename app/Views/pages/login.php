@@ -22,13 +22,21 @@
               <p class="text-center small">Enter your username & password to login</p>
             </div>
 
+            <?php if (session()->getFlashdata('failed')): ?>
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="bi bi-exclamation-octagon me-1"></i>
+                <?= session()->getFlashdata('failed'); ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <?php endif; ?>
+
             <form class="row g-3 needs-validation" novalidate action="/login" method="post">
 
               <div class="col-12">
                 <label for="yourUsername" class="form-label">Username</label>
                 <div class="input-group has-validation">
                   <span class="input-group-text" id="inputGroupPrepend">@</span>
-                  <input type="text" name="username" class="form-control" id="yourUsername" required>
+                  <input type="text" name="username" class="form-control" id="yourUsername" value="<?= old("username")?>" required>
                   <div class="invalid-feedback">Please enter your username.</div>
                 </div>
               </div>
