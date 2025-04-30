@@ -9,5 +9,5 @@ $routes->get('/', 'AuthController::index');
 $routes->post('/login', 'AuthController::login');
 $routes->get('/logout', 'AuthController::logout');
 
-$routes->get('/user', 'DashboardController::index');
-$routes->get('/admin', 'DashboardController::index');
+$routes->get('/user', 'DashboardController::index', ['filter'=>'auth']);
+$routes->get('/admin', 'DashboardController::index', ['filter'=>'auth']);
