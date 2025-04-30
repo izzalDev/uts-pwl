@@ -15,6 +15,10 @@ class AuthController extends BaseController
 
   public function index()
   {
+    if(session()->get('isLoggedIn')){
+      $role = session()->get('role');
+      return redirect()->to(base_url($role));
+    }
     return view("pages/login");
   }
 
